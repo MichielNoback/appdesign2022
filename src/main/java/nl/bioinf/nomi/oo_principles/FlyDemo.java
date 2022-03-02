@@ -1,4 +1,4 @@
-package oo_principles;
+package nl.bioinf.nomi.oo_principles;
 
 import java.util.ArrayList;
 import java.util.List;

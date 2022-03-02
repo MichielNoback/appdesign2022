@@ -1,4 +1,4 @@
-package refactor1;
+package nl.bioinf.nomi.refactor1;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
