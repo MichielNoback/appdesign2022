@@ -1,4 +1,4 @@
-package nl.bioinf.nomi.refactor1;
+package nl.bioinf.nomi.experiment_tracker;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ public class Experiment {
     String animalSpeciesEng;
     String animalSpeciesLatin;
     List<Integer> animalIds = new ArrayList<>();
+    //the type of data being collected (e.g. blood glucose, cholesterol, blood oxygen %, etc.
     String measurementType;
     List<LocalDateTime> measurementTimes = new ArrayList<>();
     List<Double> measurementsValues = new ArrayList<>();
