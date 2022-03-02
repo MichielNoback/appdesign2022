@@ -1,0 +1,14 @@
+.idea
+.gradle
+out/
+build/reports
+build/test-results
+build/classes
+build/tmp
+build/libs
+gradle/
+build.xml
+gradlew
+gradlew.bat
+JavaIntroProgrammingAssignments.iml
+/build.xml
