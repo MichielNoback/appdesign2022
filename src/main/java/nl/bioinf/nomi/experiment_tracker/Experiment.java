@@ -1,78 +1,48 @@
 package nl.bioinf.nomi.experiment_tracker;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Experiment {
-    String experimentName;
-    String experimentDescription;
-    String researcherName;
-    String researcherId;
-    String animalSpeciesEng;
-    String animalSpeciesLatin;
-    List<Integer> animalIds = new ArrayList<>();
+    private String name;
+    private String description;
+    private Researcher researcher;
+    private Map<Integer, Animal> animals = new HashMap<>();
+
     //the type of data being collected (e.g. blood glucose, cholesterol, blood oxygen %, etc.
-    String measurementType;
-    List<LocalDateTime> measurementTimes = new ArrayList<>();
-    List<Double> measurementsValues = new ArrayList<>();
+    private String measurementType;
+    private List<LocalDateTime> measurementTimes = new ArrayList<>();
+    private List<Double> measurementsValues = new ArrayList<>();
 
-    public String getExperimentName() {
-        return experimentName;
+
+    public Experiment(String name) {
+        this.name = name;
     }
 
-    public void setExperimentName(String experimentName) {
-        this.experimentName = experimentName;
+    public void addAnimal(Animal animal) {
+        Objects.requireNonNull(animal);
+        if (this.animals.containsKey(animal.animalId())) {
+            throw new IllegalArgumentException("animal with this ID already exists");
+        }
+        this.animals.put(animal.animalId(), animal);
     }
 
-    public String getExperimentDescription() {
-        return experimentDescription;
+    public Map<Integer, Animal> getAnimals() {
+        return Collections.unmodifiableMap(animals);
+        //alternative
+        //return new HashMap<>(animals);
     }
 
-    public void setExperimentDescription(String experimentDescription) {
-        this.experimentDescription = experimentDescription;
+    public String getName() {
+        return name;
     }
 
-    public String getResearcherName() {
-        return researcherName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setResearcherName(String researcherName) {
-        this.researcherName = researcherName;
-    }
-
-    public String getResearcherId() {
-        return researcherId;
-    }
-
-    public void setResearcherId(String researcherId) {
-        this.researcherId = researcherId;
-    }
-
-    public String getAnimalSpeciesEng() {
-        return animalSpeciesEng;
-    }
-
-    public void setAnimalSpeciesEng(String animalSpeciesEng) {
-        this.animalSpeciesEng = animalSpeciesEng;
-    }
-
-    public String getAnimalSpeciesLatin() {
-        return animalSpeciesLatin;
-    }
-
-    public void setAnimalSpeciesLatin(String animalSpeciesLatin) {
-        this.animalSpeciesLatin = animalSpeciesLatin;
-    }
-
-    public List<Integer> getAnimalIds() {
-        return animalIds;
-    }
-
-    public void setAnimalIds(List<Integer> animalIds) {
-        this.animalIds = animalIds;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getMeasurementType() {
@@ -127,29 +97,4 @@ public class Experiment {
         throw new UnsupportedOperationException("not implemented yet");
     }
 
-    @Override
-    public String toString() {
-        return "Experiment{" +
-                "experimentName='" + experimentName + '\'' +
-                ", experimentDescription='" + experimentDescription + '\'' +
-                ", researcherName='" + researcherName + '\'' +
-                ", researcherId='" + researcherId + '\'' +
-                ", animalSpeciesEng='" + animalSpeciesEng + '\'' +
-                ", animalSpeciesLatin='" + animalSpeciesLatin + '\'' +
-                ", animalsIds=" + animalIds +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Experiment that = (Experiment) o;
-        return Objects.equals(experimentName, that.experimentName) && Objects.equals(experimentDescription, that.experimentDescription) && Objects.equals(researcherName, that.researcherName) && Objects.equals(researcherId, that.researcherId) && Objects.equals(animalSpeciesEng, that.animalSpeciesEng) && Objects.equals(animalSpeciesLatin, that.animalSpeciesLatin) && Objects.equals(animalIds, that.animalIds);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(experimentName, experimentDescription, researcherName, researcherId, animalSpeciesEng, animalSpeciesLatin, animalIds);
-    }
 }
