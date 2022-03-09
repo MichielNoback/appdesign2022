@@ -18,7 +18,12 @@ public class FlyDemo {
         for( Flyable flyable : fliers) {
             System.out.println(flyable.getClass().getSimpleName());
             if (flyable instanceof Bird){
-                ((Bird) flyable).eatForBreakfast();
+                Bird b = (Bird) flyable;
+                b.eatForBreakfast();
+                b.reportStatus();
+
+                //String conservationStatus = b.conservationStatus;
+
             }
             flyable.fly();
         }
