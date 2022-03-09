@@ -1,6 +1,7 @@
 package nl.bioinf.nomi.experiment_tracker;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -13,26 +14,26 @@ class ExperimentTest {
     @BeforeEach
     void createExperiment() {
         defaultExperiment = new Experiment("Experiment with a mouse");
-        defaultExperiment.addAnimal(new Animal(1,
-                "Rat",
-                "Rattus norvegicus"));
+        defaultExperiment.addAnimal(
+                new AnimalData(new Animal(1,"Rat", "Rattus norvegicus")));
     }
 
+    @Disabled("Demo purposes")
     @Test
     void testEncapsulation() {
         Experiment experiment = new Experiment("Exp1");
         experiment.addAnimal(
-                new Animal(1,
+                new AnimalData(new Animal(1,
                         "Mouse",
-                        "Mus musculus"));
-        Map<Integer, Animal> animals = experiment.getAnimals();
+                        "Mus musculus")));
+        Map<Integer, AnimalData> animals = experiment.getAllAnimalData();
         System.out.println("animals = " + animals);
         animals.clear();
-        animals.put(2, new Animal(2,
+        animals.put(2, new AnimalData(new Animal(2,
                 "Dragon",
-                "Dragonus dragonus"));
+                "Dragonus dragonus")));
         System.out.println("animals = " + animals);
-        animals = experiment.getAnimals();
+        animals = experiment.getAllAnimalData();
         System.out.println("animals = " + animals);
         //assertEquals();
 
@@ -42,14 +43,14 @@ class ExperimentTest {
     void addAnimal_singleAnimal() {
         Experiment experiment = new Experiment("Exp2");
         experiment.addAnimal(
-                new Animal(1,
+                new AnimalData(new Animal(1,
                 "Mouse",
-                "Mus musculus"));
-        Map<Integer, Animal> animals = experiment.getAnimals();
+                "Mus musculus")));
+        Map<Integer, AnimalData> animals = experiment.getAllAnimalData();
         assertEquals(1, animals.size());
-        assertEquals(1, animals.get(1).animalId());
-        assertEquals("Mouse", animals.get(1).animalSpeciesEng());
-        assertEquals("Mus musculus", animals.get(1).animalSpeciesLatin());
+        assertEquals(1, animals.get(1).getAnimal().animalId());
+        assertEquals("Mouse", animals.get(1).getAnimal().animalSpeciesEng());
+        assertEquals("Mus musculus", animals.get(1).getAnimal().animalSpeciesLatin());
     }
 
     @Test
