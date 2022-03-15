@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MeasurementSeries {//the type of data being collected (e.g. blood glucose, cholesterol, blood oxygen %, etc.
     //private String measurementType;
@@ -12,6 +13,16 @@ public class MeasurementSeries {//the type of data being collected (e.g. blood g
     private List<Double> measurementsValues = new ArrayList<Double>();
 
     public MeasurementSeries() {
+    }
+
+
+    private void test() {
+        List<Double> collect = measurementsValues.parallelStream().
+                filter((d) -> d > 0.5).
+                filter((d) -> d < 1.0).
+                distinct().
+                peek(System.out::println).  //same as  peek(d -> System.out.println(d)).
+                collect(Collectors.toList());
     }
 
     public List<LocalDateTime> getMeasurementTimes() {
