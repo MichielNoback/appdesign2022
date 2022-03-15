@@ -15,30 +15,12 @@ public class MeasurementSeries {//the type of data being collected (e.g. blood g
     public MeasurementSeries() {
     }
 
-
-    private void test() {
-        List<Double> collect = measurementsValues.parallelStream().
-                filter((d) -> d > 0.5).
-                filter((d) -> d < 1.0).
-                distinct().
-                peek(System.out::println).  //same as  peek(d -> System.out.println(d)).
-                collect(Collectors.toList());
-    }
-
     public List<LocalDateTime> getMeasurementTimes() {
         return measurementTimes;
     }
 
-    public void setMeasurementTimes(List<LocalDateTime> measurementTimes) {
-        this.measurementTimes = measurementTimes;
-    }
-
     public List<Double> getMeasurementsValues() {
         return measurementsValues;
-    }
-
-    public void setMeasurementsValues(List<Double> measurementsValues) {
-        this.measurementsValues = measurementsValues;
     }
 
     /**
@@ -69,6 +51,10 @@ public class MeasurementSeries {//the type of data being collected (e.g. blood g
      * @return measurementsStatistics
      */
     public Map<String, Double> getMeasurementsStatistics(LocalDateTime start, LocalDateTime end) {
+        throw new UnsupportedOperationException("not implemented yet");
+    }
+
+    public void addDatapoint(LocalDateTime dateTime, Double measurementValue) {
         throw new UnsupportedOperationException("not implemented yet");
     }
 }

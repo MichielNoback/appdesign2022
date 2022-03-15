@@ -20,12 +20,17 @@ public class Experiment {
         this.researcher = researcher;
     }
 
-    public void addAnimal(AnimalData animalData) {
+    public void addAnimalData(AnimalData animalData) {
         Objects.requireNonNull(animalData);
         if (this.animals.containsKey(animalData.getAnimal().animalId())) {
             throw new IllegalArgumentException("animal with this ID already exists");
         }
         this.animals.put(animalData.getAnimal().animalId(), animalData);
+    }
+
+    public AnimalData getAnimalData(int animalId) {
+        if (animals.containsKey(animalId)) return animals.get(animalId);
+        else throw new IllegalArgumentException("this animal is not known: " + animalId);
     }
 
     public Map<Integer, AnimalData> getAllAnimalData() {

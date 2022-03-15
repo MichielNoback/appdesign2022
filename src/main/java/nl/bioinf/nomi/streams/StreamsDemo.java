@@ -3,6 +3,7 @@ package nl.bioinf.nomi.streams;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class StreamsDemo {
@@ -34,7 +35,12 @@ public class StreamsDemo {
         seq.chars().
                 //filter(i -> isLegalDna(i)).
                 mapToObj(c -> (char) c).
-                filter(n -> legalNucleotides.contains(n)).
+                filter(new Predicate<Character>() {
+                    @Override
+                    public boolean test(Character character) {
+                        return legalNucleotides.contains(character);
+                    }
+                }). //SAME AS://   n -> legalNucleotides.contains(n)
                 forEach(System.out::println);
 
     }

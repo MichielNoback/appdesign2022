@@ -14,7 +14,7 @@ class ExperimentTest {
     @BeforeEach
     void createExperiment() {
         defaultExperiment = new Experiment("Experiment with a mouse");
-        defaultExperiment.addAnimal(
+        defaultExperiment.addAnimalData(
                 new AnimalData(new Animal(1,"Rat", "Rattus norvegicus")));
     }
 
@@ -22,7 +22,7 @@ class ExperimentTest {
     @Test
     void testEncapsulation() {
         Experiment experiment = new Experiment("Exp1");
-        experiment.addAnimal(
+        experiment.addAnimalData(
                 new AnimalData(new Animal(1,
                         "Mouse",
                         "Mus musculus")));
@@ -42,7 +42,7 @@ class ExperimentTest {
     @Test
     void addAnimal_singleAnimal() {
         Experiment experiment = new Experiment("Exp2");
-        experiment.addAnimal(
+        experiment.addAnimalData(
                 new AnimalData(new Animal(1,
                 "Mouse",
                 "Mus musculus")));
