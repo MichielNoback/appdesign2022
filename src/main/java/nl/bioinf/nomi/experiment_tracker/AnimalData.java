@@ -22,7 +22,8 @@ public class AnimalData {
     public void addDatapoint(LocalDateTime dateTime,
                              MeasurementType type,
                              Double measurementValue) {
-        measurements.get(type).addDatapoint(dateTime, measurementValue);
+        measurements.get(type).addDatapoint(
+                new DataPoint(dateTime, measurementValue));
     }
 
 

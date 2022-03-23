@@ -6,21 +6,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MeasurementSeries {//the type of data being collected (e.g. blood glucose, cholesterol, blood oxygen %, etc.
-    //private String measurementType;
+public class MeasurementSeries {
     private MeasurementType measurementType;
-    private List<LocalDateTime> measurementTimes = new ArrayList<LocalDateTime>();
-    private List<Double> measurementsValues = new ArrayList<Double>();
+    private List<DataPoint> dataPoints = new ArrayList<>();
 
     public MeasurementSeries() {
     }
 
     public List<LocalDateTime> getMeasurementTimes() {
-        return measurementTimes;
+        return dataPoints.
+                stream().
+                map(d -> d.dateTime()).
+                collect(Collectors.toList());
     }
 
     public List<Double> getMeasurementsValues() {
-        return measurementsValues;
+        return dataPoints.
+                stream().
+                map(d -> d.measurementValue()).
+                collect(Collectors.toList());
     }
 
     /**
@@ -54,7 +58,10 @@ public class MeasurementSeries {//the type of data being collected (e.g. blood g
         throw new UnsupportedOperationException("not implemented yet");
     }
 
-    public void addDatapoint(LocalDateTime dateTime, Double measurementValue) {
-        throw new UnsupportedOperationException("not implemented yet");
+    public void addDatapoint(DataPoint datapoint) {
+        if (this.dataPoints.get(dataPoints.size() - 1).isBefore(datapoint)){
+            throw new IllegalArgumentException("the given datapoint lies before the last added");
+        }
+        this.dataPoints.add(datapoint);
     }
 }
