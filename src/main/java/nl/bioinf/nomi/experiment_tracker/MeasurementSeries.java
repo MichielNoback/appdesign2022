@@ -59,7 +59,11 @@ public class MeasurementSeries {
     }
 
     public void addDatapoint(DataPoint datapoint) {
-        if (this.dataPoints.get(dataPoints.size() - 1).isBefore(datapoint)){
+//        if (this.dataPoints.size() == 0) {
+//            this.dataPoints.add(datapoint);
+//            return;
+//        }
+        if (this.dataPoints.size() > 0 && this.dataPoints.get(dataPoints.size() - 1).isBefore(datapoint)){
             throw new IllegalArgumentException("the given datapoint lies before the last added");
         }
         this.dataPoints.add(datapoint);
